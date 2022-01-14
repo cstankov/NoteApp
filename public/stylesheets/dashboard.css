@@ -1,0 +1,56 @@
+.container {
+    width: 700px;
+}
+
+.video_list .video{
+    border: 1 solid;
+    width: 12em;
+    margin: 2%;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+/* .inline{
+    display: inline-flex;
+    flex-direction: column;
+    border: 1 solid;
+    width: 12em;
+    margin: 2%;
+    align-items: center;
+    text-align: center;
+} */
+
+.video_list .video>img {
+    height: 9em;
+}
+
+.video_list .video img{
+    background-color: white;
+    width: 12em;
+    height: 9em;
+    margin: 4%;
+}
+
+.videoText {
+    vertical-align: top;
+    display: inline;
+    text-align: center;
+    margin-left: 5px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* number of lines to show */
+    -webkit-box-orient: vertical;
+}
+
+.border {
+    border: 1px solid #000;
+    border-radius: 3px;
+}
+
+#addVideosBtn {
+    height: 3em;
+    padding-left: 2em;
+    padding-right: 2em;
+}

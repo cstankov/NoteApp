@@ -1,0 +1,23 @@
+.sign_in-container {
+  padding: 2em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* border: 1px solid black; */
+  box-shadow: 2px 1px 5px -2px #888;
+}
+
+.sign_in-container form {
+  display: flex;
+  flex-direction: column;
+  width: 20em;
+  max-width: calc(100% - 1em);
+  margin-top: 1em;
+  gap: 0.5em;
+}
+
+.sign_in-container form input {
+  height: 3em;
+  padding-left: 1em;
+  padding-right: 1em;
+}

@@ -1,0 +1,15 @@
+<body>
+  <div class="sign_in-container">
+    <h1>Sign Up</h1>
+    <a href="/sign_in">Sign In</a>
+    <% if (flash_error) { %>
+    <div class="alert alert-danger"><%= flash_error %></div>
+    <% } %>
+    <form for="/sign_up" method="POST">
+      <input type="text" name="username" placeholder="Username" required />
+      <input type="password" name="password" placeholder="Password" required />
+      <input id="submitBtn" type="submit" value="Sign Up" />
+    </form>
+  </div>
+  <link rel="stylesheet" href="/stylesheets/login.css" />
+</body>

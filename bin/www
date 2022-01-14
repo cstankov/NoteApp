@@ -1,0 +1,146 @@
+#!/usr/bin/env node
+
+/**
+ * Module dependencies.
+ */
+
+var app = require('../app')
+global.db = require("../db")
+
+/**
+ * Get port from environment and store in Express.
+ */
+var port = parseInt(process.env.PORT) || 3000
+app.set('port', port)
+
+/**
+ * Listen on provided port, on all network interfaces.
+ */
+
+async function start_server() {
+  global.db.pool.connect()
+    .then(client => {
+      global.db.client = client
+      console.log("Connected to database")
+      var server = app.listen(port, () => {
+        console.log(`Server started on port ${port}`)
+      })
+
+      var io = require('socket.io')(server)
+        .use((socket, next) => {
+          app.session_middleware(socket.request, {}, next)
+        })
+        .on('connection', async function (socket) {
+          const video_id = socket.handshake.query.video
+          const video = await global.db.get_video(video_id)
+          if (video) {
+            socket.join(video_id)
+
+            const user = socket.request.session.passport ? socket.request.session.passport.user : null
+
+            const public_notes = await global.db.get_notes(video)
+            let private_notes = []
+
+            if (user) {
+              private_notes = await global.db.get_user_notes(video, user)
+            }
+
+            socket.emit("messages", public_notes, private_notes)
+
+            socket.on("chat_message", async function (note) {
+              if (!user) { return }
+              const new_note = await global.db.create_note(user, video, note)
+              new_note.username = user.username
+              if (new_note.public) {
+                io.to(video_id).emit("chat_message", new_note)
+              } else {
+                socket.emit("chat_message", new_note)
+              }
+            })
+
+            socket.on("share", async function (username, cb) {
+              if (!user) {
+                cb(`You are not allowed to do this!`)
+              }
+
+              const other_user = await global.db.get_user(username)
+
+              if (!other_user) {
+                cb(`User ${username} does not exist`)
+              }
+
+              try {
+                await global.db.share_with(video, other_user)
+                cb(`Shared video with ${other_user.username}`)
+              } catch (err) {
+                if (err["code"] == 23505) {
+                  cb(`Video is already shared with ${other_user.username}`)
+                } else {
+                  cb(JSON.stringify(err))
+                }
+              }
+            })
+
+            socket.on("subscribe", async function (cb) {
+              if (!user) {
+                cb({
+                  success: false,
+                  message: `You need to be logged in to do this!`
+                })
+              }
+
+              const other_user = await global.db.get_user_by_id(video.user_id)
+              
+              if (!other_user) {
+                cb({
+                  success: false,
+                  message: `User does not exist`
+                })
+              }
+
+              try {
+                await global.db.subscribe_to(user, other_user)
+                cb({
+                  success: true
+                })
+              } catch (err) {
+                if (err["code"] == 23505) {
+                  cb({
+                    success: true
+                  })
+                } else {
+                  cb({
+                    success: false,
+                    message: JSON.stringify(err)
+                  })
+                }
+              }
+            })
+
+            socket.on("unsubscribe", async function (cb) {
+              if (!user) {
+                cb({
+                  success: false,
+                  message: `You need to be logged in to do this!`
+                })
+              }
+
+              const other_user = await global.db.get_user_by_id(video.user_id)
+
+              if (!other_user) {
+                cb({
+                  success: false,
+                  message: `User does not exist`
+                })
+              }
+
+              await global.db.unsubscribe(user, other_user)
+              cb({ success: true })
+            })
+          }
+        })
+    })
+}
+
+//app.listen(port)
+start_server()

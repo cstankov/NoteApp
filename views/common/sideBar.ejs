@@ -1,0 +1,55 @@
+<div class="nav" id="navbar">
+  <div class="icon header__toggle" id="header-toggle">
+    menu
+  </div>
+  <nav class="nav__container">
+    <div>
+      <a class="nav__link nav__logo">
+        <span class="nav__logo-name">TwoNotes</span>
+      </a>
+      <div class="nav__list">
+        <div class="nav__items">
+          <a href="/" class="nav__link">
+            <span class="icon">home</span>
+            <span class="nav__name">Home</span>
+          </a>
+        </div>
+        <% if (locals.user) { %>
+          <div class="nav__items">
+            <div class="nav__dropdown">
+              <a href="/add_video" class="nav__link">
+                <span class="icon">add</span>
+                <span class="nav__name">Add Video</span>
+              </a>
+            </div>
+          </div>
+      </div>
+      <div class="nav__items" id="others">
+        <h3 class="nav__subtitle">Others</h3>
+        <div class="nav__dropdown">
+          <a href="/sign_out" class="nav__link">
+            <span class="icon">logout</span>
+            <span class="nav__name">Log out</span>
+          </a>
+        </div>
+        <% } else { %>
+          <div class="nav__items">
+            <h3 class="nav__subtitle">Others</h3>
+            <a href="/sign_in" class="nav__link">
+              <span class="icon">login</span>
+              <span class="nav__name">Sign In</span>
+            </a>
+
+            <a href="/sign_up" class="nav__link">
+              <span class="icon">person_add</span>
+              <span class="nav__name">Sign Up</span>
+            </a>
+          </div>
+          <% } %>
+      </div>
+    </div>
+  </nav>
+</div>
+
+<script src="/javascript/common/sideBar.js" async defer></script>
+<link rel="stylesheet" href="/stylesheets/common/sideBar.css">

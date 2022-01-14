@@ -1,0 +1,84 @@
+<body>
+  <form id="form2"></form>
+  <form id="main_form" action="/edit_video" method="POST">
+    <input type="hidden" name="video_id" value="<%= video.id %>" />
+  </form>
+
+  <table>
+    <tr>
+      <td><label for="vtitle">Title:</label></td>
+      <td>
+        <div>
+          <input form="main_form" type="text" name="title" id="vtitle" value="<%= video.title %>" />
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td><label for="video_tags">Tags:</label></td>
+      <td>
+        <div style="display: flex; gap: 0.5em;">
+          <input form="form2" type="text" style="flex: 1" id="video_tags" />
+          <button id="video_add_tag">Add Tag</button>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2">
+        <div id="video_tag_list">
+          <% for (const tag of tags) { %>
+            <div id="tag_<%= tag.tag_name %>">
+              <span>
+                <%= tag.tag_name %>
+              </span>
+              <input type="hidden" name="tags" form="main_form" value="<%= tag.tag_name %>" />
+              <button class="icon" onclick="remove_tag('tag_<%= tag.tag_name %>')">
+                close
+              </button>
+            </div>
+            <% } %>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td><label for="public">Public:</label></td>
+      <td>
+        <div>
+          <input form="main_form" id="public" name="public" type="checkbox" <% if (video.public) { %>checked<% } %> />
+        </div>
+      </td>
+    </tr>
+  </table>
+  <input form="main_form" type="submit" value="Save" />
+
+  <div>Shared with:</div>
+  <table>
+    <% for (const user of shared_with) { %>
+      <tr>
+        <td>
+          <%= user.username %>
+        </td>
+        <td>
+          <form action="/unshare" method="POST">
+            <input type="hidden" value="<%= video.id %>" name="video_id">
+            <input type="hidden" value="<%= user.id %>" name="user_id">
+            <input type="submit" class="icon" value="close" />
+          </form>
+        </td>
+      </tr>
+    <% } %>
+  </table>
+
+  <form action="/delete_video" method="POST">
+    <input type="hidden" name="video_id" value="<%=video.id %>" />
+    <input type="submit" value="Delete video" />
+  </form>
+
+  <script src="/javascript/add_video.js" async defer></script>
+  <link rel="stylesheet" href="/stylesheets/add_video.css" />
+  <script>
+    function remove_tag(id) {
+      const e = document.getElementById(id)
+      e.parentElement.removeChild(e)
+    }
+  </script>
+</body>

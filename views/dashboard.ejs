@@ -1,0 +1,58 @@
+<body>
+    <div class="container">
+        <% if (user) { %>
+        <% if (subscribed_videos.length > 0) { %>
+        <div class="video_list">
+            <h3>My Subsciptions</h3>
+            <div id="subscribed" class="subscriptions">
+                <% for (const video of subscribed_videos) { %>
+                    <div class="video">
+                        <a class="userVideosText" href="/video/<%= video.id %>">
+                            <img src="<%= video.thumbnail %>" alt="defaultVideo"></img>
+                            <%= video.title %>
+                        </a>
+                    </div>
+                <% } %>
+            </div>
+        </div>
+        <% } %>
+
+        <% if (shared_videos.length > 0) { %>
+        <div class="video_list">
+            <h3>Shared By Others</h3>
+            <div id="sharebyothers" class="sharedbyothers">
+                <% for (const video of shared_videos) { %>
+                    <div class="video">
+                        <a class="userVideosText" href="/video/<%= video.id %>">
+                            <img src="<%= video.thumbnail %>" alt="defaultVideo"></img>
+                            <%= video.title %>
+                        </a>
+                    </div>
+                <% } %>
+            </div>
+        </div>
+        <% } %>
+
+        <div class="video_list">
+            <h3><a href="/user/<%= user.username%>">My Videos</a></h3>
+            <div class="row">
+                <% for (const video of user_videos) { %>
+                    <div class="video">
+                        <a class="userVideosText" href="/video/<%= video.id %>">
+                            <img src="<%= video.thumbnail %>" alt="defaultVideo"></img>
+                            <%= video.title %>
+                        </a>
+                    </div>
+                <% } %>
+            </div>
+            <div class="row addVideo">
+                <button id="addVideosBtn" onclick="location.href=`/add_video`" type="button">Add Video</button>
+            </div>
+        </div>
+
+        <% } %>
+    </div>
+
+    <script src="/javascript/dashboard.js" async defer></script>
+    <link rel="stylesheet" href="/stylesheets/dashboard.css">
+</body>

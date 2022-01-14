@@ -1,0 +1,29 @@
+<body>
+  <div class="container">
+    <h3>
+      <%= query %>
+    </h3>
+    <table class="videoContainer">
+      <% for (const video of videos) { %>
+        <tr class="video">
+          <td>
+            <a href="/video/<%= video.id %>">
+              <img src="<%= video.thumbnail %>" />
+            </a>
+          </td>
+          <td class="title"><a href="/video/<%= video.id %>">
+              <%= video.title %>
+            </a></td>
+          <% if (can_upload) { %>
+          <td><a href="/edit_video/<%= video.id %>">Edit</a></td>
+          <% } %>
+        </tr>
+        <% } %>
+    </table>
+    <% if (can_upload) { %>
+      <button id="addVideosBtn" onclick="location.href=`/add_video`" type="button">Add Video</button>
+    <% } %>
+  </div>
+
+  <link rel="stylesheet" href="/stylesheets/videos.css">
+</body>

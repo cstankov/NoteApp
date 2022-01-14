@@ -1,0 +1,46 @@
+<body>
+  <div class="container">
+    <h1>Add a video</h1>
+
+    <% if (flash_error) { %>
+    <div class="alert alert-danger"><%= flash_error %></div>
+    <% } %>
+
+    <form id="form2"></form>
+    <form id="main_form" action="/add_video" method="POST"></form>
+    <table>
+      <tr>
+        <td><label for="video_url">URL:</label></td>
+        <td>
+          <div>
+          <input form="main_form" type="text" name="url" id="video_url" required />
+        </div>
+        </td>
+      </tr>
+      <tr>
+        <td><label for="video_tags">Tags:</label></td>
+        <td>
+          <div style="display: flex; gap: 0.5em;">
+            <input form="form2" type="text" style="flex: 1;" id="video_tags" />
+            <button id="video_add_tag">Add Tag</button>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2"><div id="video_tag_list"></div></td>
+      </tr>
+      <tr>
+        <td><label for="video_public">Public:</label></td>
+        <td>
+          <input form="main_form" type="checkbox" name="public" id="video_public" />
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2" style="text-align: center;"><input form="main_form" type="submit" class="add" value="Add" /></td>
+      </tr>
+    </table>
+  </div>
+
+  <script src="/javascript/add_video.js" async defer></script>
+  <link rel="stylesheet" href="/stylesheets/add_video.css" />
+</body>

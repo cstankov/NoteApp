@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Main page</title>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="/stylesheets/style.css" />
+</head>
+
+<body id="body">
+  <%- include("../common/sideBar.ejs") %>
+  <div id="searchContainer">
+    <div id="searchBox">
+      <form action="/search" id="searchForm">
+        <input id="search" type="text" name="query" placeholder="Search for a video" required>
+        <input type="submit" class="searchButton icon" value="search"></input>
+      </form>
+    </div>
+  </div>
+    <%- body %>
+      <%- script %>
+</body>
+
+</html>

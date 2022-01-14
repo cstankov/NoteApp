@@ -1,0 +1,56 @@
+<body>
+  <meta id="video_id" name="video_id" content="<%= video.id %>" />
+  <meta id="video_url" name="video_id" content="<%= video.url %>" />
+  <div class="container">
+    <div class="maincontent">
+      <div id="videoContainer" class="middleContainers"></div>
+      <div>
+        <h2><%= video.title %></h2>
+      </div>
+      <div class="uploader">
+        <span><a href="/user/<%= video.username %>"><%= video.username %></a></span>
+        <% if (user) { %>
+          <% if (user.id == video.user_id) { %>
+          <button id="btnShare">Share</button>
+          <% } else if (is_subscribed) { %>
+          <button id="btnSubscribe">Unsubscribe</button>
+          <% } else { %>
+          <button id="btnSubscribe">Subscribe</button>
+          <% }} %>
+      </div>
+      <div>
+        <span>Tags:</span>
+        <% for (const tag of tags) { %>
+        <span class="tag"><%= tag.tag_name %></span>
+        <% } %>
+      </div>
+    </div>
+
+    <div id="notes">
+      <% if (user) { %>
+        <div>
+          <input type="radio" id="public_notes" name="notes_visibility" checked="checked">
+          <label for="public_notes">Public Notes</label>
+          <input type="radio" id="private_notes" name="notes_visibility">
+          <label for="private_notes">Private Notes</label>
+        </div>
+      <% } %>
+      <div id="chat_messages"></div>
+      <% if (user) { %>
+      <form id="chat_form">
+        <input
+          id="chat_txt"
+          autocomplete="off"
+          autofocus="on"
+          placeholder="type your message here..."
+        />
+        <input type="submit" value="Send" />
+      </form>
+      <% } %>
+    </div>
+  </div>
+
+  <link rel="stylesheet" href="/stylesheets/video.css" />
+  <script src="../../socket.io/socket.io.js"></script>
+  <script src="/javascript/video.js"></script>
+</body>

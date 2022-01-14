@@ -1,0 +1,250 @@
+.middleContainers {
+  display: flex;
+  justify-content: center;
+}
+
+html,
+body {
+  margin: 0;
+}
+
+html {
+  height: 100%;
+  width: 100%;
+  display: flex;
+}
+
+body {
+  padding: 0.5em;
+  flex: 1;
+}
+
+.container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5em;
+  align-items: stretch;
+  overflow-y: auto;
+  flex: 1;
+}
+
+.maincontent {
+  width: 35em;
+  flex-grow: 2;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-self: stretch;
+  min-height: 75%;
+}
+
+#videoContainer {
+  flex: 1;
+  align-self: center;
+  width: 100%;
+}
+
+#videoPort {
+  width: 100%;
+  height: 100%;
+  max-width: 900px;
+  max-height: 700px;
+  min-height: 300px;
+}
+
+.tags {
+  width: 100%;
+  max-width: 900px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5em;
+}
+
+#allNoteContainer {
+  margin-top: 30px;
+  width: 90%;
+  height: 100%;
+  overflow-y: scroll;
+  border: 1px solid black;
+}
+
+#noteContainer {
+  display: inline-block;
+  justify-self: center;
+  position: relative;
+  align-content: center;
+  max-width: 1000px;
+  margin-top: 30px;
+  width: 100%;
+  border: 1px solid black;
+}
+
+#pastNotes {
+  width: 100%;
+  height: 80%;
+  max-height: 150px;
+  margin-bottom: 30px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+#notes {
+  width: 25em;
+  min-height: 12em;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+  max-height: calc(100% - 0.5em);
+  padding: 0.25em;
+}
+
+#chat_messages {
+  flex: 1;
+  border: 1px solid rgb(0, 0, 0, 0.2);
+  border-radius: 0.25em;
+  padding: 0.5em;
+  overflow-y: scroll;
+}
+
+.create_note {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+  border-radius: 4px;
+  margin: 1em;
+  width: 80%;
+  align-self: center;
+}
+
+.create_note h2 {
+  margin: 0.2em 1em 0 1em;
+}
+
+#note_text {
+  word-wrap: break-word;
+  min-height: 4em;
+  border-radius: 4px;
+  flex: 1;
+  border: 0.5px solid black;
+  margin: 1em 1em 0 1em;
+}
+
+#post_note {
+  align-self: flex-end;
+  margin: 1em;
+  padding: 0.25em 2em;
+  background-color: white;
+  border: 0.4px solid black;
+}
+
+#notesContainer {
+  width: 75%;
+  height: 100%;
+  align-content: center;
+  border: 0.4px solid black;
+}
+
+.note {
+  padding: 10px;
+}
+
+.note h4,
+.note p {
+  display: inline-block;
+  margin: 0;
+}
+
+.note p {
+  font-size: 14px;
+}
+
+.divider {
+  border-bottom: 0.5px solid #ccc;
+}
+
+.chat_message {
+  display: flex;
+  gap: 0.5em;
+}
+
+#chat_form {
+  display: flex;
+}
+
+#chat_txt {
+  flex: 1;
+  padding: 0.5em;
+}
+
+.chat_time {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.share_modal_outer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 100;
+  pointer-events: none;
+}
+
+.share_modal {
+  background: rgb(255, 255, 255);
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  display: inline-block;
+  position: relative;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.2);
+  border-radius: 0.25em;
+  pointer-events: all;
+  padding: 0.25em;
+}
+
+.share_modal_content {
+  padding: 0.5em;
+}
+
+.share_modal_content button {
+  margin-left: 0.5em;
+  padding: 0.1em;
+}
+
+.share_modal_header {
+  display: flex;
+}
+
+.share_modal_header > span {
+  padding: 0.2em 0.5em;
+  flex: 1;
+}
+
+#btnShare {
+  height: 2em;
+  padding-left: 1em;
+  padding-right: 1em;
+}
+
+.uploader {
+  display: flex;
+  gap: 0.5em;
+  align-items: center;
+}
+
+.uploader > span {
+  font-weight: bold;
+}
+
+#chat_form > input[type="submit"] {
+  padding-left: 2.25em;
+  padding-right: 2.25em;
+  margin-left: 1em;
+}

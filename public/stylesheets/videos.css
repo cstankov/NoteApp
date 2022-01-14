@@ -1,0 +1,27 @@
+.container {
+  width: 700px;
+  max-width: 100%;
+}
+
+table {
+  border-collapse: separate;
+  border-spacing: 0 1em;
+}
+
+.title {
+  margin-bottom: 0.5%;
+}
+
+#noResults {
+  margin-top: 4%;
+}
+
+.video img {
+  max-height: 6em;
+}
+
+#addVideosBtn {
+  height: 3em;
+  padding-left: 2em;
+  padding-right: 2em;
+}
